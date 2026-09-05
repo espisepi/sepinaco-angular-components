@@ -1,5 +1,5 @@
 {
   "html.customData": [
-    "node_modules/angular-three/metadata.json"
+    "./node_modules/angular-three/metadata.json"
   ]
 }
