@@ -8,6 +8,8 @@ import { NgtsContactShadows, NgtsEnvironment, NgtsFloat, NgtsLightformer } from 
 import { easing } from 'maath';
 import { filter, map, startWith } from 'rxjs';
 import { CurrentRoute } from './current';
+import { NgtsOrbitControls } from 'angular-three-soba/controls';
+
 
 @Component({
   selector: 'app-routed-scene',
@@ -24,9 +26,15 @@ import { CurrentRoute } from './current';
 
 		<app-current [position]="[0, 0, -10]" [text]="currentRoute()" />
 
-		<ngts-float [options]="{ floatIntensity: 2 }">
+    <router-outlet />
+
+    <ngts-orbit-controls [options]="{ enablePan: false, autoRotate: false }" />
+
+
+
+    <!-- <ngts-float [options]="{ floatIntensity: 2 }">
 			<router-outlet />
-		</ngts-float>
+		</ngts-float> -->
 
 		<ngts-contact-shadows [options]="{ scale: 100, position: [0, -7.5, 0], blur: 1, far: 100, opacity: 0.85 }" />
 		<ngts-environment [options]="{ preset: 'city' }">
@@ -54,6 +62,7 @@ import { CurrentRoute } from './current';
     NgtpN8AO,
     NgtpTiltShift2,
     RouterOutlet,
+    NgtsOrbitControls,
   ],
 })
 export class RoutedScene {
@@ -70,14 +79,15 @@ export class RoutedScene {
   );
 
   constructor() {
-    beforeRender(({ camera, pointer, delta }) => {
-      easing.damp3(
-        camera.position,
-        [Math.sin(-pointer.x) * 5, pointer.y * 3.5, 15 + Math.cos(pointer.x) * 10],
-        0.2,
-        delta,
-      );
-      camera.lookAt(0, 0, 0);
-    });
+    // Movement of the camera based on pointer position
+    // beforeRender(({ camera, pointer, delta }) => {
+    //   easing.damp3(
+    //     camera.position,
+    //     [Math.sin(-pointer.x) * 5, pointer.y * 3.5, 15 + Math.cos(pointer.x) * 10],
+    //     0.2,
+    //     delta,
+    //   );
+    //   camera.lookAt(0, 0, 0);
+    // });
   }
 }

@@ -23,7 +23,7 @@ import { RoutedScene } from './routed-scene';
      style="
      position: absolute;
      bottom: 1rem;
-     right: 1rem;
+     right: 10rem;
      display: flex;
      gap: 0.5rem;
      list-style: none;
@@ -59,6 +59,16 @@ import { RoutedScene } from './routed-scene';
 					[routerLinkActiveOptions]="{ exact: true }"
 				>
 					bomb
+				</a>
+			</li>
+      <li>
+				<a
+					routerLink="car"
+					class="underline"
+					routerLinkActive="text-blue-500"
+					[routerLinkActiveOptions]="{ exact: true }"
+				>
+					car
 				</a>
 			</li>
 		</ul>
