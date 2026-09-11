@@ -4,7 +4,7 @@ import { NgtsMeshTransmissionMaterial } from 'angular-three-soba/materials';
 import { Mesh } from 'three';
 import { GLTF } from 'three-stdlib';
 
-// import bombUrl from './bomb-gp.glb' with { loader: 'file' };
+import bombUrl from './bomb-gp.glb' with { loader: 'file' };
 
 interface BombGLTF extends GLTF {
   nodes: {
@@ -15,7 +15,7 @@ interface BombGLTF extends GLTF {
 @Component({
   selector: 'app-bomb',
   template: `
-		<!-- @if (gltf.value(); as gltf) {
+		@if (gltf.value(); as gltf) {
 			<ngt-mesh
 				[receiveShadow]="true"
 				[castShadow]="true"
@@ -24,12 +24,12 @@ interface BombGLTF extends GLTF {
 			>
 				<ngts-mesh-transmission-material [options]="{ backside: true, thickness: 5, backsideThickness: 10 }" />
 			</ngt-mesh>
-		} -->
+		}
 	`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgtsMeshTransmissionMaterial],
 })
 export default class Bomb {
-  // protected gltf = gltfResource<BombGLTF>(() => bombUrl);
+  protected gltf = gltfResource<BombGLTF>(() => bombUrl);
 }
