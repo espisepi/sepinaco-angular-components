@@ -10,9 +10,9 @@ import { filter, map, startWith } from 'rxjs';
 import { CurrentRoute } from './current';
 
 @Component({
-	selector: 'app-routed-scene',
-	template: `
-		<ngt-color *args="['#e0e0e0']" attach="background" />
+  selector: 'app-routed-scene',
+  template: `
+		<ngt-color *args="['#330000']" attach="background" />
 		<ngt-spot-light
 			[position]="[20, 20, 10]"
 			[penumbra]="1"
@@ -41,43 +41,43 @@ import { CurrentRoute } from './current';
 			<ngtp-tilt-shift2 [options]="{ blur: 0.2 }" />
 		</ngtp-effect-composer>
 	`,
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [
-		NgtArgs,
-		NgtsFloat,
-		CurrentRoute,
-		NgtsContactShadows,
-		NgtsEnvironment,
-		NgtsLightformer,
-		NgtpEffectComposer,
-		NgtpN8AO,
-		NgtpTiltShift2,
-		RouterOutlet,
-	],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    NgtArgs,
+    NgtsFloat,
+    CurrentRoute,
+    NgtsContactShadows,
+    NgtsEnvironment,
+    NgtsLightformer,
+    NgtpEffectComposer,
+    NgtpN8AO,
+    NgtpTiltShift2,
+    RouterOutlet,
+  ],
 })
 export class RoutedScene {
-	protected readonly Math = Math;
+  protected readonly Math = Math;
 
-	private router = inject(Router);
-	protected currentRoute = toSignal(
-		this.router.events.pipe(
-			filter((ev): ev is NavigationEnd => ev instanceof NavigationEnd),
-			map((ev) => ev.urlAfterRedirects.split('/routed').at(-1) as string),
-			startWith(this.router.url.split('/routed').at(-1) as string),
-		),
-		{ initialValue: '/knot' },
-	);
+  private router = inject(Router);
+  protected currentRoute = toSignal(
+    this.router.events.pipe(
+      filter((ev): ev is NavigationEnd => ev instanceof NavigationEnd),
+      map((ev) => ev.urlAfterRedirects.split('/routed').at(-1) as string),
+      startWith(this.router.url.split('/routed').at(-1) as string),
+    ),
+    { initialValue: '/knot' },
+  );
 
-	constructor() {
-		beforeRender(({ camera, pointer, delta }) => {
-			easing.damp3(
-				camera.position,
-				[Math.sin(-pointer.x) * 5, pointer.y * 3.5, 15 + Math.cos(pointer.x) * 10],
-				0.2,
-				delta,
-			);
-			camera.lookAt(0, 0, 0);
-		});
-	}
+  constructor() {
+    beforeRender(({ camera, pointer, delta }) => {
+      easing.damp3(
+        camera.position,
+        [Math.sin(-pointer.x) * 5, pointer.y * 3.5, 15 + Math.cos(pointer.x) * 10],
+        0.2,
+        delta,
+      );
+      camera.lookAt(0, 0, 0);
+    });
+  }
 }
